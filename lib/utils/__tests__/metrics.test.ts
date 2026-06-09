@@ -4,6 +4,7 @@ import {
   contarPagos,
   contarReembolsos,
   calcularTicketMedio,
+  detectarMonedaDominante,
   type PagoRegistro,
 } from '../metrics'
 
@@ -53,5 +54,26 @@ describe('calcularTicketMedio', () => {
       { id_pago: 'pe1', importe: 700, moneda: 'USD', estado: 'pending', fecha_creacion: '2024-02-02' },
     ]
     expect(calcularTicketMedio(sinCompletados)).toBe(0)
+  })
+})
+
+describe('detectarMonedaDominante', () => {
+  it('retorna la moneda más frecuente entre los completados', () => {
+    const datos: PagoRegistro[] = [
+      { id_pago: 'd1', importe: 10, moneda: 'USD', estado: 'completed', fecha_creacion: '2024-03-01' },
+      { id_pago: 'd2', importe: 20, moneda: 'USD', estado: 'completed', fecha_creacion: '2024-03-02' },
+      { id_pago: 'd3', importe: 30, moneda: 'COP', estado: 'completed', fecha_creacion: '2024-03-03' },
+      { id_pago: 'd4', importe: 40, moneda: 'EUR', estado: 'refunded', fecha_creacion: '2024-03-04' },
+    ]
+    expect(detectarMonedaDominante(datos)).toBe('USD')
+  })
+
+  it('en caso de empate retorna la primera en orden alfabético', () => {
+    const datos: PagoRegistro[] = [
+      { id_pago: 'e1', importe: 10, moneda: 'USD', estado: 'completed', fecha_creacion: '2024-04-01' },
+      { id_pago: 'e2', importe: 20, moneda: 'COP', estado: 'completed', fecha_creacion: '2024-04-02' },
+      { id_pago: 'e3', importe: 30, moneda: 'EUR', estado: 'completed', fecha_creacion: '2024-04-03' },
+    ]
+    expect(detectarMonedaDominante(datos)).toBe('COP')
   })
 })

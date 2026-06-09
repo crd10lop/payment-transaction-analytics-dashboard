@@ -26,3 +26,22 @@ export const calcularTicketMedio = (pagos: PagoRegistro[]): number => {
 
   return calcularIngresosTotales(pagos) / completados.length
 }
+
+export const detectarMonedaDominante = (pagos: PagoRegistro[]): string => {
+  const frecuencias = soloCompletados(pagos).reduce<Record<string, number>>(
+    (acc, { moneda }) => {
+      acc[moneda] = (acc[moneda] ?? 0) + 1
+      return acc
+    },
+    {},
+  )
+
+  return Object.keys(frecuencias)
+    .sort()
+    .reduce((dominante, moneda) => {
+      if (dominante === '') {
+        return moneda
+      }
+      return frecuencias[moneda] > frecuencias[dominante] ? moneda : dominante
+    }, '')
+}
