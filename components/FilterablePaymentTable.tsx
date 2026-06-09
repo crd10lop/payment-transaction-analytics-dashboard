@@ -33,6 +33,7 @@ export const FilterablePaymentTable = ({
       <div className="flex flex-col gap-3 sm:flex-row">
         <input
           type="text"
+          data-testid="input-busqueda"
           value={terminoBusqueda}
           onChange={({ target }) => setTerminoBusqueda(target.value)}
           placeholder="Buscar por ID de pago..."
@@ -61,7 +62,7 @@ export const FilterablePaymentTable = ({
           <option value="pending">Pending</option>
         </select>
       </div>
-      <p className="text-sm text-gray-500">
+      <p data-testid="contador-resultados" className="text-sm text-gray-500">
         {pagosFiltrados.length} de {pagos.length} pagos
       </p>
       <PaymentTable pagos={pagosFiltrados} />

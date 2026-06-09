@@ -44,6 +44,7 @@ export const DashboardMetrics = ({
       {tarjetas.map(({ etiqueta, valor, Icono }) => (
         <div
           key={etiqueta}
+          data-testid="metrica-tarjeta"
           className="flex items-center gap-4 rounded-lg border border-gray-200 bg-white p-5 shadow-sm"
         >
           <div className="rounded-full bg-gray-100 p-3 text-gray-700">
