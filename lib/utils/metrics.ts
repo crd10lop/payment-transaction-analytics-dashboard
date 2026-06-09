@@ -37,7 +37,7 @@ export const detectarMonedaDominante = (pagos: PagoRegistro[]): string => {
   )
 
   return Object.keys(frecuencias)
-    .sort()
+    .sort((a, b) => a.localeCompare(b))
     .reduce((dominante, moneda) => {
       if (dominante === '') {
         return moneda
