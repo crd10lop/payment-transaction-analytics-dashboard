@@ -40,6 +40,7 @@ export const FilterablePaymentTable = ({
           className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm sm:max-w-xs"
         />
         <select
+          aria-label="Filtrar por moneda"
           value={monedaSeleccionada}
           onChange={({ target }) => setMonedaSeleccionada(target.value)}
           className="rounded-md border border-gray-300 px-3 py-2 text-sm"
@@ -52,6 +53,7 @@ export const FilterablePaymentTable = ({
           ))}
         </select>
         <select
+          aria-label="Filtrar por estado"
           value={estadoSeleccionado}
           onChange={({ target }) => setEstadoSeleccionado(target.value)}
           className="rounded-md border border-gray-300 px-3 py-2 text-sm"
